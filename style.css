@@ -9,7 +9,7 @@
     width: 100vW;
     grid-template-rows: repeat(12, 1fr);
     grid-template-columns: repeat(12, 1fr);
-    background-image: url(/tickethack-frontend/images/background.jpg);
+    background-image: url(./images/background.jpg);
     background-size: cover;
 }
 
