@@ -14,9 +14,14 @@
     grid-row-end: 2;
     grid-column-start: 1;
     grid-column-end: 13;
-    color: rgb(48, 158, 48);
     font-size: 40px;
 }
+#title {
+    color: rgb(48, 158, 48);
+
+}
+
+
 
 #search {
     background-color: white;
