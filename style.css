@@ -35,3 +35,8 @@
     grid-column-end: 10;
     border-radius: 20px;
 }
+
+
+#text-cart {
+    background-color: green;
+}
