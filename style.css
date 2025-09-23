@@ -21,7 +21,10 @@
 
 }
 
-
+.link{
+    color: black;
+    font-size: 15px;
+}
 
 #search {
     background-color: white;
