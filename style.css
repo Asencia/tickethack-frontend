@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 #container {
     display : grid;
     height: 100vh;
@@ -21,8 +26,6 @@
 
 }
 
-
-
 #search {
     background-color: white;
     grid-row-start: 5;
@@ -41,7 +44,8 @@
     border-radius: 20px;
 }
 
-
-#text-cart {
-    background-color: green;
+#container-booking, #container-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
