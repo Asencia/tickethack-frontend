@@ -3,6 +3,7 @@ console.log("hello")
 fetch('http://localhost:3000/carts')
     .then(response => response.json())
     .then(data => {
+        const total = data.carts.reduce((acc, item) => acc + item.price,0)
         if(data.carts){
             for (let i = 0 ; i < data.carts.length; i++) {
                 document.querySelector('.trip-cart-section').innerHTML += `
@@ -17,10 +18,11 @@ fetch('http://localhost:3000/carts')
                 <p>My Cart</p>
                 
                 `
-                //le montan total du panier
+                //le montant total du panier
+                console.log(total)
                 document.querySelector('#summarize-cart').innerHTML =
                 `
-                <div id = "total-cart">Total : ${data.carts[i].price}</div>
+                <div id = "total-cart">Total : ${total}€</div>
                 <div id = "purchase-cart">
                     <button>Purchase</button>
                 </div>
@@ -29,5 +31,16 @@ fetch('http://localhost:3000/carts')
             }
         }
     })
-
-// bouton supprimer
+    
+    // bouton supprimer
+    for (let i = 0 ; i < document.querySelectorAll('.delete-cart').length; i++){
+        document.querySelectorAll('.delete-cart')[i].addEventListener('click', function () {
+            fetch(`http://localhost:3000/carts/${this._id}`, {method : "DELETE"})
+            .then (response => response.json())
+            .then (data => {
+                if (data.result){
+                    this.parentNode.remove();
+                }
+            })
+        })
+    }
