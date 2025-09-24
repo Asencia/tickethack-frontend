@@ -18,9 +18,13 @@ document.querySelector("#search").addEventListener("click", () => {
                 <div class = "trip">${data[i].departure} > ${data[i].arrival}</div>
                 <div class = "hour">${data[i].date}</div>
                 <div class = "price">${data[i].price}€</div>
-                <div class = "book"><button id="btn-book"> Book </button></div>
+                <div class = "book"><button class="btn-book"> Book </button></div>
                     `;
             }
 
     })
+})
+
+document.querySelector(".btn-book").addEventListener("click", () => {
+    window.location.assign('cart.html');
 })
