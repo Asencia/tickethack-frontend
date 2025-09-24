@@ -34,9 +34,7 @@ fetch('http://localhost:3000/carts')
                 document.querySelector('#purchase-cart').addEventListener("click", function () {
                     const cart = data.carts[i];
 
-                    const rawDate = document.querySelector("#date").value; // ex: "2025-09-25"
-                    const hourString = choosenTrip.date;                  // ex: "02:44"
-                    const dateFormatIso = new Date(`${rawDate}T${hourString}:00`).toISOString();
+                    const dateIso = new Date(cart.date).toISOString();
 
                     fetch('http://localhost:3000/bookings', {
                     method: 'POST',
@@ -44,7 +42,7 @@ fetch('http://localhost:3000/carts')
                     body: JSON.stringify({ 
                         departure: cart.departure,
                         arrival: cart.arrival,
-                        date: dateFormatIso,
+                        date: dateIso,
                         price: cart.price })
                     })
                     .then(response => response.json())
