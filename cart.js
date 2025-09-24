@@ -31,7 +31,8 @@ fetch('http://localhost:3000/carts')
                    
                 
             }
-            for (let i=0 ; i < document.querySelectorAll('button').length; i++)
+        }
+        for (let i=0 ; i < document.querySelectorAll('button').length; i++){
             document.querySelectorAll('button')[i].addEventListener('click', function () {
             fetch(`http://localhost:3000/carts/${this.id}`, {method : "DELETE"})
             .then (response => response.json())
