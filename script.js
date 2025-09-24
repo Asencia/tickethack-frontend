@@ -35,7 +35,7 @@ document.querySelector("#search").addEventListener("click", () => {
 
             const rawDate = document.querySelector("#date").value; // ex: "2025-09-25"
             const hourString = choosenTrip.date;                  // ex: "02:44"
-            const isoDate = new Date(`${rawDate}T${hourString}:00`).toISOString();
+            const dateFormatIso = new Date(`${rawDate}T${hourString}:00`).toISOString();
         
             fetch("http://localhost:3000/carts", {
             method: "POST",
@@ -43,7 +43,7 @@ document.querySelector("#search").addEventListener("click", () => {
             body: JSON.stringify({
                 departure: choosenTrip.departure,
                 arrival: choosenTrip.arrival,
-                date: choosenTrip.date,
+                date: dateFormatIso,
                 price: choosenTrip.price
                 })
             })
