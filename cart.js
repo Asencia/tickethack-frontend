@@ -23,29 +23,13 @@ fetch('http://localhost:3000/carts')
                 
                 
                 //le montant total du panier
-                console.log(total)
                 document.querySelector('#summarize-cart').innerHTML =
                 `
                 <div id = "total-cart">Total : ${total}€</div>
                 <div>
                     <button id = "purchase-cart">Purchase</button>
                 </div>
-                
-                `
-                document.querySelector('#purchase-cart').addEventListener("click", function () {
-                const cart = document.querySelector('.trip-cart-section').value;
-                 fetch('http://localhost:3000/bookings', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cart })
-                })
-                .then(response => response.json())
-                .then(data => {
-                console.log("Ok purchase", data);
-                window.location.assign("bookings.html");
-                });
-                });;
-                ;
+                `;clickPurchase()
             }
               // bouton supprimer
             for (let i=0 ; i < document.querySelectorAll('.delete-cart').length; i++){
@@ -65,12 +49,14 @@ fetch('http://localhost:3000/carts')
         }
     }
 )
-
-
+function clickPurchase(){
+    document.querySelector("#purchase-cart").addEventListener('click', function() {
+        console.log("click purchase ok")
+    })
+}
 
 
 /*
-reload
 fetch('http://localhost:3000/carts')
                         .then(response => response.json())
                         .then(data => {
@@ -83,22 +69,6 @@ fetch('http://localhost:3000/carts')
                                      `;
                             }
                         })
-
-
-purchase
-document.querySelector('#purchase-cart').addEventListener("click", function (){
-    const purchase = document.querySelector('#purchase-cart').value;
-    fetch('http://localhost:3000/bookings', {
-        method : 'POST',
-        headers : {'Content-Type' : 'application/json'},
-        body : JSON.stringify({purchase})
-        }
-    )   .then(response => response.json())
-        .then (data => {
-            console.log("Ok purchase", data)
-            window.location.assign("booking.html")
-        })
-})
 */
 
 
