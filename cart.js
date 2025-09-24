@@ -32,33 +32,16 @@ fetch('http://localhost:3000/carts')
                 
                 `;
             }
-        }
-        for (let i=0 ; i < document.querySelectorAll('button').length; i++){
-            document.querySelectorAll('button')[i].addEventListener('click', function () {
-            fetch(`http://localhost:3000/carts/${this.id}`, {method : "DELETE"})
-            .then (response => response.json())
-            .then (data => {
-                if (data.result){
-                    this.parentNode.parentNode.remove();
-                }
-            })})
+              // bouton supprimer
+            for (let i=0 ; i < document.querySelectorAll('.delete-cart').length; i++){
+                document.querySelectorAll('button')[i].addEventListener('click', function () {
+                fetch(`http://localhost:3000/carts/${this.id}`, {method : "DELETE"})
+                .then (response => response.json())
+                .then (data => {
+                    if (data.result){
+                        this.parentNode.parentNode.remove();
+                    }
+                })})
+            }
         }
     })
-
-
-
-
-    //ctrl z
-    // bouton supprimer
- 
-
-    /*
-    
-            fetch(`http://localhost:3000/carts/${delete-cart[i]._id}`, {method : "DELETE"})
-            .then (response => response.json())
-            .then (data => {
-                if (data.result){
-                    this.parentNode.remove();
-                }
-            })
-    */
