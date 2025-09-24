@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tickethack - Y/V</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <div id="container">
+
         <div id="header"> 
             <a id="title">Tickethack</a>
             <a class="link">cart</a>
             <a class="link">bookings</a>
         </div>
+
         <div id="text">
             <h3>Explore the world effortlessly by train !</h3>
             <h6>Compare, book and enjoy cheap prices for train tickets : your journey starts on Tickethack. </h6>
         </div>
-        <div id="search">search</div>
+
+        <div id="search-container">
+            <input id="depart" type="text" placeholder="Departure" />
+            <input id="arrival" type="text" placeholder="Arrival" />
+            <input id="date" type="date" lang="fr-FR" />
+            <button id="search">Search</button>
+        </div>
+
         <div id="result">result</div>
+
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>

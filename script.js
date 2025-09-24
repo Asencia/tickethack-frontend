@@ -1,4 +1,10 @@
 document.querySelector("#search").addEventListener("click", () => {
+
+    const depart = document.querySelector("#depart").value;
+    const arrival = document.querySelector("#arrival").value;
+    const date = document.querySelector("#date").value.split("-").reverse().join("/");
+
+
     fetch("http://localhost:3000/trips", {
         method: "GET"
     })
