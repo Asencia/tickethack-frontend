@@ -1,11 +1,25 @@
 //récupérer les éléments présents dans le cart 
 console.log("hello")
-
+function calculateTotal() {
+    const prices = document.querySelectorAll('.price-cart')//.reduce((acc, item) => acc + item.textContent,0)
+    let total = 0
+    for (let price of prices){
+        total += Number(price.textContent)
+        console.log(price.textContent)
+    }
+    console.log(total)
+    document.querySelector('#summarize-cart').innerHTML =
+                `
+                <div id = "total-cart">Total : ${total}€</div>
+                <div>
+                    <button id = "purchase-cart">Purchase</button>
+                </div>
+                `
+}
 fetch('http://localhost:3000/carts')
     .then(response => response.json())
     .then(data => {
 
-        const total = data.carts.reduce((acc, item) => acc + item.price,0)
 
         if(data.carts){
             for (let i = 0 ; i < data.carts.length; i++) {
@@ -16,20 +30,18 @@ fetch('http://localhost:3000/carts')
 
                 //récupère les éléments dans carts
                 document.querySelector('.trip-cart-section').innerHTML += `
+                <div>
                 <div class = "trip-cart">${data.carts[i].departure} > ${data.carts[i].arrival}</div>
                 <div class = "hour-cart">${data.carts[i].date}</div>
-                <div class = "price-cart">${data.carts[i].price}€</div>
+                <div>
+                <div class = "price-cart">${data.carts[i].price} </div> €
+                </div> 
                 <div class = "delete-cart"><button id="${data.carts[i]._id}"> x </button></div>
+                </div>
                 `; 
                 
                 //le montant total du panier
-                document.querySelector('#summarize-cart').innerHTML =
-                `
-                <div id = "total-cart">Total : ${total}€</div>
-                <div>
-                    <button id = "purchase-cart">Purchase</button>
-                </div>
-                `;
+                calculateTotal();
 
                 document.querySelector('#purchase-cart').addEventListener("click", function () {
                     const cart = data.carts[i];
@@ -63,7 +75,7 @@ fetch('http://localhost:3000/carts')
                 .then (data => {
                     if (data.result){
                         this.parentNode.parentNode.remove();
-                        
+                        calculateTotal()
                     }
                 }
             )
