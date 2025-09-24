@@ -32,6 +32,10 @@ document.querySelector("#search").addEventListener("click", () => {
         for(let i = 0; i < document.querySelectorAll(".btn-book").length; i++) {
             document.querySelectorAll(".btn-book")[i].addEventListener("click", function () {
             const choosenTrip = data[i];
+
+            const rawDate = document.querySelector("#date").value; // ex: "2025-09-25"
+            const hourString = choosenTrip.date;                  // ex: "02:44"
+            const dateFormatIso = new Date(`${rawDate}T${hourString}:00`).toISOString();
         
             fetch("http://localhost:3000/carts", {
             method: "POST",
@@ -39,7 +43,7 @@ document.querySelector("#search").addEventListener("click", () => {
             body: JSON.stringify({
                 departure: choosenTrip.departure,
                 arrival: choosenTrip.arrival,
-                date: choosenTrip.date,
+                date: dateFormatIso,
                 price: choosenTrip.price
                 })
             })
