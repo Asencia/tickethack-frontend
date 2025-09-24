@@ -2,35 +2,50 @@ document.querySelector("#search").addEventListener("click", () => {
 
     const depart = document.querySelector("#depart").value;
     const arrival = document.querySelector("#arrival").value;
-    const date = document.querySelector("#date").value.split("-").reverse().join("/");
+    const date = document.querySelector("#date").value.split("-").reverse().join("/"); // On attend un format DD/MM/YYYY
 
 
-    fetch("http://localhost:3000/trips", {
+    fetch(`http://localhost:3000/trips?departure=${depart}&arrival=${arrival}&date=${date}`, {
         method: "GET"
     })
     .then(response => response.json())
     .then(data => {
-        if(data){
-            document.querySelector("#result").innerHTML = `
-            <div class = "trip">${data[0].departure} > ${data[0].arrival}</div>
-            <div class = "hour">${data[0].date}</div>
-            <div class = "price">${data[0].price}€</div>
-            <div class = "book"><button id="btn-book"> Book </button></div>
-                `;
+        document.querySelector("#result").innerHTML = ``;
+        
+        if (!data || data.length === 0) {
+            document.querySelector("#result").innerHTML = `<p>No trip found.</p>`;
+            return;
         }
 
-            for (let i = 0 ; i < data.length; i++) {
-                document.querySelector("#result").innerHTML += `
+
+        for (let i = 0 ; i < data.length; i++) {
+            document.querySelector("#result").innerHTML += `
+            <div class = "row-result">
                 <div class = "trip">${data[i].departure} > ${data[i].arrival}</div>
                 <div class = "hour">${data[i].date}</div>
                 <div class = "price">${data[i].price}€</div>
-                <div class = "book"><button class="btn-book"> Book </button></div>
-                    `;
-            }
+                <button class="btn-book">Book</button>
+            </div>
+            `;
+        }
 
     })
 })
 
-document.querySelector(".btn-book").addEventListener("click", () => {
-    window.location.assign('cart.html');
-})
+for(let i = 0; i < document.querySelectorAll(".btn-book"); i++) {
+        document.querySelector(".btn-book")[i].addEventListener("click", function () {
+        const choosenTrip = data[i];
+        
+        fetch("http://localhost:3000/carts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ carts: [choosenTrip] })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Réponse back:", data);
+            window.location.assign("cart.html");
+        })
+        .catch(console.error);
+    })
+}
