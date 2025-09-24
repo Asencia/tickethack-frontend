@@ -29,23 +29,30 @@ document.querySelector("#search").addEventListener("click", () => {
             `;
         }
 
+        for(let i = 0; i < document.querySelectorAll(".btn-book").length; i++) {
+            document.querySelectorAll(".btn-book")[i].addEventListener("click", function () {
+            const choosenTrip = data[i];
+        
+            fetch("http://localhost:3000/carts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                departure: choosenTrip.departure,
+                arrival: choosenTrip.arrival,
+                date: choosenTrip.date,
+                price: choosenTrip.price
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Réponse back:", data);
+                window.location.assign("cart.html");
+            })
+            .catch(console.error);
+            })
+        }
+
     })
 })
 
-for(let i = 0; i < document.querySelectorAll(".btn-book"); i++) {
-        document.querySelector(".btn-book")[i].addEventListener("click", function () {
-        const choosenTrip = data[i];
-        
-        fetch("http://localhost:3000/carts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ carts: [choosenTrip] })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Réponse back:", data);
-            window.location.assign("cart.html");
-        })
-        .catch(console.error);
-    })
-}
+
