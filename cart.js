@@ -59,12 +59,20 @@ fetch('http://localhost:3000/carts')
                     })
                     .then(response => response.json())
                     .then(data => {
-                    console.log("Ok purchase", data);
-                    window.location.assign("bookings.html");
-                    });
+                                fetch(`http://localhost:3000/carts/`, {method : "DELETE"})
+                                .then (response => response.json())
+                                .then (data => {
+                                if (data.result){
+                                    document.querySelector('.trip-cart-section').innerHTML = "";
+                                    document.querySelector('#text-cart').innerHTML = '<p>No ticket in your cart.</p>';
+                                    document.querySelector('#summarize-cart').innerHTML = '<div id="total-cart">Total : 0€</div>';
+                                }
+                            }) 
+                            console.log("Ok purchase", data);
+                            window.location.assign("bookings.html");
+                            });
             });
-                
-            }
+        }
 
 
               // bouton supprimer
