@@ -6,18 +6,21 @@ fetch('http://localhost:3000/carts')
         const total = data.carts.reduce((acc, item) => acc + item.price,0)
         if(data.carts){
             for (let i = 0 ; i < data.carts.length; i++) {
+                //mettre le titre My cart
+                document.querySelector('#text-cart').innerHTML = `
+                <p>My Cart</p>
+                `;
+                
                 document.querySelector('.trip-cart-section').innerHTML += `
                 <div class = "trip-cart">${data.carts[i].departure} > ${data.carts[i].arrival}</div>
                 <div class = "hour-cart">${data.carts[i].date.slice(11, 16)}</div>
                 <div class = "price-cart">${data.carts[i].price}€</div>
                 <div class = "delete-cart"><button id="${data.carts[i]._id}"> x </button></div>
-                `; console.log(data.carts[i]._id)
-                //mettre le titre My cart
-                document.querySelector('#text-cart').innerHTML =
-                `
-                <p>My Cart</p>
+                `; 
                 
-                `
+                console.log(data.carts[i]._id)
+                
+                
                 //le montant total du panier
                 console.log(total)
                 document.querySelector('#summarize-cart').innerHTML =
@@ -27,9 +30,7 @@ fetch('http://localhost:3000/carts')
                     <button>Purchase</button>
                 </div>
                 
-                `
-                   
-                
+                `;
             }
         }
         for (let i=0 ; i < document.querySelectorAll('button').length; i++){
@@ -43,6 +44,10 @@ fetch('http://localhost:3000/carts')
             })})
         }
     })
+
+
+
+
     //ctrl z
     // bouton supprimer
  
