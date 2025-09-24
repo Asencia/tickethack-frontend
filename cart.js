@@ -73,12 +73,14 @@ fetch('http://localhost:3000/carts')
         }
     }
 )
-
-
+function clickPurchase(){
+    document.querySelector("#purchase-cart").addEventListener('click', function() {
+        console.log("click purchase ok")
+    })
+}
 
 
 /*
-reload
 fetch('http://localhost:3000/carts')
                         .then(response => response.json())
                         .then(data => {
@@ -91,22 +93,6 @@ fetch('http://localhost:3000/carts')
                                      `;
                             }
                         })
-
-
-purchase
-document.querySelector('#purchase-cart').addEventListener("click", function (){
-    const purchase = document.querySelector('#purchase-cart').value;
-    fetch('http://localhost:3000/bookings', {
-        method : 'POST',
-        headers : {'Content-Type' : 'application/json'},
-        body : JSON.stringify({purchase})
-        }
-    )   .then(response => response.json())
-        .then (data => {
-            console.log("Ok purchase", data)
-            window.location.assign("booking.html")
-        })
-})
 */
 
 
