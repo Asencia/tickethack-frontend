@@ -1,5 +1,6 @@
 //récupérer les éléments présents dans le cart 
 console.log("hello")
+
 fetch('http://localhost:3000/carts')
     .then(response => response.json())
     .then(data => {
@@ -10,7 +11,7 @@ fetch('http://localhost:3000/carts')
                 document.querySelector('#text-cart').innerHTML = `
                 <p>My Cart</p>
                 `;
-                
+                //récupère les éléments dans carts
                 document.querySelector('.trip-cart-section').innerHTML += `
                 <div class = "trip-cart">${data.carts[i].departure} > ${data.carts[i].arrival}</div>
                 <div class = "hour-cart">${data.carts[i].date.slice(11, 16)}</div>
@@ -40,8 +41,43 @@ fetch('http://localhost:3000/carts')
                 .then (data => {
                     if (data.result){
                         this.parentNode.parentNode.remove();
+                        
                     }
-                })})
+                }
+            )
+        }
+    )
             }
         }
-    })
+    }
+)
+
+document.querySelector('#purchase-cart').addEventListener("click", function (){
+    const purchase = document.querySelector('#purchase-cart').value;
+    fetch('http://localhost:3000/bookings', {
+        method : 'POST',
+        headers : {'Content-Type' : 'application/json'},
+        body : JSON.stringify({purchase})
+        }
+    ).then(response => response.json())
+        .then (data => {
+            
+        })
+})
+
+/*
+fetch('http://localhost:3000/carts')
+                        .then(response => response.json())
+                        .then(data => {
+                            if(data.carts){
+                                 document.querySelector('.trip-cart-section').innerHTML += `
+                                     <div class = "trip-cart">${data.carts[i].departure} > ${data.carts[i].arrival}</div>
+                                     <div class = "hour-cart">${data.carts[i].date.slice(11, 16)}</div>
+                                     <div class = "price-cart">${data.carts[i].price}€</div>
+                                     <div class = "delete-cart"><button id="${data.carts[i]._id}"> x </button></div>
+                                     `;
+                            }
+                        })
+*/
+
+
