@@ -27,11 +27,25 @@ fetch('http://localhost:3000/carts')
                 document.querySelector('#summarize-cart').innerHTML =
                 `
                 <div id = "total-cart">Total : ${total}€</div>
-                <div id = "purchase-cart">
-                    <button>Purchase</button>
+                <div>
+                    <button id = "purchase-cart">Purchase</button>
                 </div>
                 
-                `;
+                `
+                document.querySelector('#purchase-cart').addEventListener("click", function () {
+                const cart = document.querySelector('.trip-cart-section').value;
+                 fetch('http://localhost:3000/bookings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cart })
+                })
+                .then(response => response.json())
+                .then(data => {
+                console.log("Ok purchase", data);
+                window.location.assign("bookings.html");
+                });
+                });;
+                ;
             }
               // bouton supprimer
             for (let i=0 ; i < document.querySelectorAll('.delete-cart').length; i++){
@@ -52,20 +66,11 @@ fetch('http://localhost:3000/carts')
     }
 )
 
-document.querySelector('#purchase-cart').addEventListener("click", function (){
-    const purchase = document.querySelector('#purchase-cart').value;
-    fetch('http://localhost:3000/bookings', {
-        method : 'POST',
-        headers : {'Content-Type' : 'application/json'},
-        body : JSON.stringify({purchase})
-        }
-    ).then(response => response.json())
-        .then (data => {
-            
-        })
-})
+
+
 
 /*
+reload
 fetch('http://localhost:3000/carts')
                         .then(response => response.json())
                         .then(data => {
@@ -78,6 +83,22 @@ fetch('http://localhost:3000/carts')
                                      `;
                             }
                         })
+
+
+purchase
+document.querySelector('#purchase-cart').addEventListener("click", function (){
+    const purchase = document.querySelector('#purchase-cart').value;
+    fetch('http://localhost:3000/bookings', {
+        method : 'POST',
+        headers : {'Content-Type' : 'application/json'},
+        body : JSON.stringify({purchase})
+        }
+    )   .then(response => response.json())
+        .then (data => {
+            console.log("Ok purchase", data)
+            window.location.assign("booking.html")
+        })
+})
 */
 
 
