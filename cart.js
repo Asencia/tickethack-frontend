@@ -10,8 +10,8 @@ fetch('http://localhost:3000/carts')
                 <div class = "trip-cart">${data.carts[i].departure} > ${data.carts[i].arrival}</div>
                 <div class = "hour-cart">${data.carts[i].date.slice(11, 16)}</div>
                 <div class = "price-cart">${data.carts[i].price}€</div>
-                <div class = "delete-cart"><button id="btn-delete"> x </button></div>
-                `; 
+                <div class = "delete-cart"><button id="${data.carts[i]._id}"> x </button></div>
+                `; console.log(data.carts[i]._id)
                 //mettre le titre My cart
                 document.querySelector('#text-cart').innerHTML =
                 `
@@ -28,19 +28,31 @@ fetch('http://localhost:3000/carts')
                 </div>
                 
                 `
+                   
+                
             }
+            for (let i=0 ; i < document.querySelectorAll('button').length; i++)
+            document.querySelectorAll('button')[i].addEventListener('click', function () {
+            fetch(`http://localhost:3000/carts/${this.id}`, {method : "DELETE"})
+            .then (response => response.json())
+            .then (data => {
+                if (data.result){
+                    this.parentNode.parentNode.remove();
+                }
+            })})
         }
     })
-    
+    //ctrl z
     // bouton supprimer
-    for (let i = 0 ; i < document.querySelectorAll('.delete-cart').length; i++){
-        document.querySelectorAll('.delete-cart')[i].addEventListener('click', function () {
-            fetch(`http://localhost:3000/carts/${this._id}`, {method : "DELETE"})
+ 
+
+    /*
+    
+            fetch(`http://localhost:3000/carts/${delete-cart[i]._id}`, {method : "DELETE"})
             .then (response => response.json())
             .then (data => {
                 if (data.result){
                     this.parentNode.remove();
                 }
             })
-        })
-    }
+    */
